@@ -1,4 +1,4 @@
-# software-project-audit
+# 360-degree Software Project Audit
 
 A Claude Code and Codex plugin whose `audit` [Agent Skill](https://agentskills.io/specification) runs a risk-based, evidence-driven Standard Audit of the project in the agent's working directory. It covers Python and JavaScript/TypeScript/Node/frontend projects across 11 domains (architecture, code quality, security and privacy, dependencies, data, testing, CI/CD, infrastructure, observability, performance, documentation), with security mapped to OWASP Top 10:2025 and CWE Top 25. Scanners run in a pinned Docker image. Unit tests and coverage run on your machine, in the environment you prepared, only if you say up front that you trust the environment and want them run, and only after you confirm the exact commands. Say no, and no project code runs at all. The project is never modified. The plugin works in Claude Code and in Codex.
 
