@@ -1,0 +1,33 @@
+[
+  {
+    "id": "AUD-001",
+    "title": "Query built from user input",
+    "domain": "Security and privacy",
+    "severity": "High",
+    "confidence": "Confirmed",
+    "status": "Reviewed",
+    "classification": "defect",
+    "priority": "P1",
+    "evidence": [
+      {"path": "src/app.py", "line": 5, "explanation": "The lookup takes a caller-supplied name.", "tool_ref": "L-0001"}
+    ],
+    "impact": "Callers can influence the query.",
+    "recommendation": "Keep the query parameterised and validate the input.",
+    "standards_refs": {"owasp": ["A05:2025"], "cwe": ["CWE-89"]}
+  },
+  {
+    "id": "AUD-002",
+    "title": "Helper has no docstring",
+    "domain": "Code quality and maintainability",
+    "severity": "Low",
+    "confidence": "Strongly supported",
+    "status": "Reviewed",
+    "classification": "technical_debt",
+    "priority": "P3",
+    "evidence": [
+      {"path": "src/app.py", "line": 4, "explanation": "find() is undocumented.", "tool_ref": "ruff"}
+    ],
+    "impact": "Slower onboarding.",
+    "recommendation": "Document the helper."
+  }
+]

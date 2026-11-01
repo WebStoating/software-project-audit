@@ -1,0 +1,83 @@
+{
+  "duplicates": [
+    {
+      "firstFile": {
+        "end": 46,
+        "endLoc": {
+          "column": 16,
+          "line": 46,
+          "position": 825
+        },
+        "name": "app/util.py",
+        "start": 40,
+        "startLoc": {
+          "column": 11,
+          "line": 40,
+          "position": 638
+        }
+      },
+      "format": "python",
+      "fragment": "def total_a(items):\n    total = 0\n    for item in items:\n        if item.get(\"active\"):\n            total += item[\"price\"] * item[\"qty\"]\n            total -= item.get(\"discount\", 0)\n    return total",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 55,
+        "endLoc": {
+          "column": 16,
+          "line": 55,
+          "position": 1026
+        },
+        "name": "app/util.py",
+        "start": 49,
+        "startLoc": {
+          "column": 11,
+          "line": 49,
+          "position": 839
+        }
+      },
+      "tokens": 45
+    }
+  ],
+  "statistics": {
+    "detectionDate": "2026-10-26T16:46:02.113Z",
+    "formats": {
+      "python": {
+        "clones": 1,
+        "duplicatedLines": 7,
+        "duplicatedTokens": 45,
+        "lines": 55,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 12.727272727272727,
+        "percentageTokens": 19.396551724137932,
+        "sources": 1,
+        "tokens": 232
+      },
+      "yaml": {
+        "clones": 0,
+        "duplicatedLines": 0,
+        "duplicatedTokens": 0,
+        "lines": 7,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 0.0,
+        "percentageTokens": 0.0,
+        "sources": 1,
+        "tokens": 33
+      }
+    },
+    "total": {
+      "clones": 1,
+      "duplicatedLines": 7,
+      "duplicatedTokens": 45,
+      "lines": 62,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 11.29032258064516,
+      "percentageTokens": 16.9811320754717,
+      "sources": 2,
+      "tokens": 265
+    }
+  }
+}

@@ -1,0 +1,12 @@
+[project]
+name = "software-project-audit-dev"
+version = "0.0.0"
+requires-python = ">=3.9"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+markers = ["docker: needs a running Docker daemon", "hostrun: creates venvs or node_modules and needs network"]
+testpaths = ["tests"]
+pythonpath = ["software-project-audit/scripts"]

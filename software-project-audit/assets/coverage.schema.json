@@ -1,0 +1,249 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Audit coverage",
+  "type": "object",
+  "required": [
+    "scope",
+    "domains"
+  ],
+  "properties": {
+    "scope": {
+      "type": [
+        "string",
+        "object"
+      ]
+    },
+    "domains": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "applicable"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^D(0[1-9]|1[01])$"
+          },
+          "applicable": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "maturity": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4
+              },
+              {
+                "enum": [
+                  "Not verified",
+                  "Not applicable"
+                ]
+              }
+            ]
+          },
+          "rationale": {
+            "type": "string"
+          },
+          "confidence": {
+            "enum": [
+              "Confirmed",
+              "Strongly supported",
+              "Potential",
+              "Unverified"
+            ]
+          },
+          "checks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "outcome"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "outcome": {
+                  "enum": [
+                    "verified_pass",
+                    "verified_fail",
+                    "reviewed_no_issue",
+                    "needs_verification",
+                    "not_reviewed",
+                    "not_applicable"
+                  ]
+                },
+                "evidence": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "note": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "blind_spots": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "workflows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "entry_point": {
+            "type": "string"
+          },
+          "traced": {
+            "type": "boolean"
+          },
+          "findings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "standards": {
+      "type": "object",
+      "properties": {
+        "owasp": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "outcome"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "outcome": {
+                "enum": [
+                  "verified_pass",
+                  "verified_fail",
+                  "reviewed_no_issue",
+                  "needs_verification",
+                  "not_reviewed",
+                  "not_applicable"
+                ]
+              },
+              "method": {
+                "type": "string"
+              },
+              "findings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "cwe": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "outcome"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "outcome": {
+                "enum": [
+                  "verified_pass",
+                  "verified_fail",
+                  "reviewed_no_issue",
+                  "needs_verification",
+                  "not_reviewed",
+                  "not_applicable"
+                ]
+              },
+              "method": {
+                "type": "string"
+              },
+              "findings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "readiness": {
+      "type": "object",
+      "properties": {
+        "decision": {
+          "enum": [
+            "Ready within reviewed scope",
+            "Ready with conditions",
+            "Not ready — identified blockers",
+            "Insufficient evidence to determine readiness"
+          ]
+        },
+        "goal": {
+          "type": "string"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "blockers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "subagents": {
+      "type": "object",
+      "properties": {
+        "used": {
+          "type": "boolean"
+        },
+        "briefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

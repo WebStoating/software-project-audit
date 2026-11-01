@@ -1,0 +1,180 @@
+{
+  "owasp_top10_2025": {
+    "source_url": "https://owasp.org/Top10/2025/",
+    "retrieved": "2026-10-27",
+    "items": [
+      {
+        "id": "A01:2025",
+        "name": "Broken Access Control"
+      },
+      {
+        "id": "A02:2025",
+        "name": "Security Misconfiguration"
+      },
+      {
+        "id": "A03:2025",
+        "name": "Software Supply Chain Failures"
+      },
+      {
+        "id": "A04:2025",
+        "name": "Cryptographic Failures"
+      },
+      {
+        "id": "A05:2025",
+        "name": "Injection"
+      },
+      {
+        "id": "A06:2025",
+        "name": "Insecure Design"
+      },
+      {
+        "id": "A07:2025",
+        "name": "Authentication Failures"
+      },
+      {
+        "id": "A08:2025",
+        "name": "Software or Data Integrity Failures"
+      },
+      {
+        "id": "A09:2025",
+        "name": "Security Logging and Alerting Failures"
+      },
+      {
+        "id": "A10:2025",
+        "name": "Mishandling of Exceptional Conditions"
+      }
+    ]
+  },
+  "cwe_top25": {
+    "edition": "2025",
+    "source_url": "https://cwe.mitre.org/top25/archive/2025/2025_cwe_top25.html",
+    "retrieved": "2026-10-27",
+    "items": [
+      {
+        "rank": 1,
+        "id": "CWE-79",
+        "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+      },
+      {
+        "rank": 2,
+        "id": "CWE-89",
+        "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"
+      },
+      {
+        "rank": 3,
+        "id": "CWE-352",
+        "name": "Cross-Site Request Forgery (CSRF)"
+      },
+      {
+        "rank": 4,
+        "id": "CWE-862",
+        "name": "Missing Authorization"
+      },
+      {
+        "rank": 5,
+        "id": "CWE-787",
+        "name": "Out-of-bounds Write"
+      },
+      {
+        "rank": 6,
+        "id": "CWE-22",
+        "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+      },
+      {
+        "rank": 7,
+        "id": "CWE-416",
+        "name": "Use After Free"
+      },
+      {
+        "rank": 8,
+        "id": "CWE-125",
+        "name": "Out-of-bounds Read"
+      },
+      {
+        "rank": 9,
+        "id": "CWE-78",
+        "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+      },
+      {
+        "rank": 10,
+        "id": "CWE-94",
+        "name": "Improper Control of Generation of Code ('Code Injection')"
+      },
+      {
+        "rank": 11,
+        "id": "CWE-120",
+        "name": "Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')"
+      },
+      {
+        "rank": 12,
+        "id": "CWE-434",
+        "name": "Unrestricted Upload of File with Dangerous Type"
+      },
+      {
+        "rank": 13,
+        "id": "CWE-476",
+        "name": "NULL Pointer Dereference"
+      },
+      {
+        "rank": 14,
+        "id": "CWE-121",
+        "name": "Stack-based Buffer Overflow"
+      },
+      {
+        "rank": 15,
+        "id": "CWE-502",
+        "name": "Deserialization of Untrusted Data"
+      },
+      {
+        "rank": 16,
+        "id": "CWE-122",
+        "name": "Heap-based Buffer Overflow"
+      },
+      {
+        "rank": 17,
+        "id": "CWE-863",
+        "name": "Incorrect Authorization"
+      },
+      {
+        "rank": 18,
+        "id": "CWE-20",
+        "name": "Improper Input Validation"
+      },
+      {
+        "rank": 19,
+        "id": "CWE-284",
+        "name": "Improper Access Control"
+      },
+      {
+        "rank": 20,
+        "id": "CWE-200",
+        "name": "Exposure of Sensitive Information to an Unauthorized Actor"
+      },
+      {
+        "rank": 21,
+        "id": "CWE-306",
+        "name": "Missing Authentication for Critical Function"
+      },
+      {
+        "rank": 22,
+        "id": "CWE-918",
+        "name": "Server-Side Request Forgery (SSRF)"
+      },
+      {
+        "rank": 23,
+        "id": "CWE-77",
+        "name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')"
+      },
+      {
+        "rank": 24,
+        "id": "CWE-639",
+        "name": "Authorization Bypass Through User-Controlled Key"
+      },
+      {
+        "rank": 25,
+        "id": "CWE-770",
+        "name": "Allocation of Resources Without Limits or Throttling"
+      }
+    ]
+  }
+}

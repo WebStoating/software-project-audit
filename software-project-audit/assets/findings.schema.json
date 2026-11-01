@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Audit findings",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "title",
+      "domain",
+      "severity",
+      "confidence",
+      "status",
+      "evidence",
+      "impact",
+      "recommendation"
+    ],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^AUD-\\d{3}$"
+      },
+      "title": {
+        "type": "string"
+      },
+      "domain": {
+        "type": "string",
+        "enum": [
+          "Architecture and design",
+          "Code quality and maintainability",
+          "Security and privacy",
+          "Dependencies and software supply chain",
+          "Data architecture and integrity",
+          "Testing and quality assurance",
+          "CI/CD and developer experience",
+          "Infrastructure and configuration",
+          "Observability and operations",
+          "Performance, scalability, and resilience",
+          "Documentation and engineering readiness"
+        ]
+      },
+      "severity": {
+        "enum": [
+          "Critical",
+          "High",
+          "Medium",
+          "Low",
+          "Info"
+        ]
+      },
+      "confidence": {
+        "enum": [
+          "Confirmed",
+          "Strongly supported",
+          "Potential",
+          "Unverified"
+        ]
+      },
+      "status": {
+        "enum": [
+          "Reviewed",
+          "Needs verification"
+        ]
+      },
+      "evidence": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "required": [
+            "path",
+            "explanation"
+          ],
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "line": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "end_line": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "explanation": {
+              "type": "string"
+            },
+            "tool_ref": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "impact": {
+        "type": "string"
+      },
+      "recommendation": {
+        "type": "string"
+      },
+      "classification": {
+        "enum": [
+          "defect",
+          "risk",
+          "technical_debt",
+          "improvement_opportunity",
+          "accepted_tradeoff"
+        ]
+      },
+      "priority": {
+        "enum": [
+          "P0",
+          "P1",
+          "P2",
+          "P3"
+        ]
+      },
+      "effort": {
+        "enum": [
+          "Small",
+          "Medium",
+          "Large",
+          "Unknown"
+        ]
+      },
+      "component": {
+        "type": "string"
+      },
+      "workflow": {
+        "type": "string"
+      },
+      "root_cause": {
+        "type": "string"
+      },
+      "evidence_scope": {
+        "type": "string"
+      },
+      "tool_refs": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "assumptions": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "verification_steps": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "standards_refs": {
+        "type": "object",
+        "properties": {
+          "owasp": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^A(0[1-9]|10):2025$"
+            }
+          },
+          "cwe": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^CWE-\\d+$"
+            }
+          },
+          "asvs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "related_findings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "remediation_owner": {
+        "type": "string"
+      },
+      "accepted_risk": {
+        "type": [
+          "string",
+          "object",
+          "boolean"
+        ]
+      },
+      "commit": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+ "plans": [],
+ "skipped": [],
+ "results": [
+  {
+   "package_path": ".",
+   "status": "completed",
+   "failed_phase": null,
+   "exit_codes": {
+    "setup": 0,
+    "test": 0
+   },
+   "counts": {
+    "passed": 3,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "coverage": null,
+   "raw_dir": "audit/raw/tests/root",
+   "notes": [],
+   "runtime_version": "Python 3.12.4",
+   "stripped_env": [],
+   "coverage_tool_suggestion": null
+  }
+ ]
+}

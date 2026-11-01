@@ -1,0 +1,1 @@
+[{"id": "L-0001", "tools": ["bandit"], "tool": "bandit", "rule_id": "B608", "message": "SQL", "path": "src/app.py", "start_line": 5}]
