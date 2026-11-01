@@ -4,30 +4,33 @@ Guidance for AI coding agents (Claude Code, Codex, others) working in this repos
 
 ## What this repository is
 
-The source for `software-project-audit`, an [Agent Skill](https://agentskills.io/specification) that runs a risk-based, evidence-driven Standard Audit of the project in the agent's current working directory. It supports Python and JavaScript/TypeScript/Node/frontend projects. Scanners run in a pinned Docker image; unit tests and coverage run on the developer's machine in the environment they prepared, after they confirm the commands. The same skill must work in Claude Code and in Codex.
+The source for `software-project-audit`, a Claude Code and Codex plugin whose `audit` [Agent Skill](https://agentskills.io/specification) runs a risk-based, evidence-driven Standard Audit of the project in the agent's current working directory. It supports Python and JavaScript/TypeScript/Node/frontend projects. Scanners run in a pinned Docker image; unit tests and coverage run on the developer's machine in the environment they prepared, after they confirm the commands. The same skill must work in Claude Code and in Codex.
 
 ## Read first
 
 | File | Role |
 |---|---|
-| `software-project-audit/references/methodology.md` | **Source of truth for audit content**: phases, domains and check IDs, evidence rules, vocabularies, scanner allowlist, test-run procedure, report contract. A running document: it has no version number and is edited in place. |
-| `software-project-audit/SKILL.md` | How the agent drives the skill's CLI through the methodology's phases. |
-| This file | How the skill is packaged and built: the hard rules below apply to all code. |
+| `software-project-audit/skills/audit/references/methodology.md` | **Source of truth for audit content**: phases, domains and check IDs, evidence rules, vocabularies, scanner allowlist, test-run procedure, report contract. A running document: it has no version number and is edited in place. |
+| `software-project-audit/skills/audit/SKILL.md` | How the agent drives the skill's CLI through the methodology's phases. |
+| This file | How the plugin and skill are packaged and built: the hard rules below apply to all code. |
 
 ## Layout
 
 ```
 AGENTS.md
 README.md
-install.sh                    # symlinks the skill into Claude Code / Codex skill dirs
 pyproject.toml                # dev-only: pytest via uv
+.agents/plugins/marketplace.json  # dev-only Codex marketplace (local source); never installed
 tests/                        # pytest suite, fixtures/ (planted-issue repos), data/ (tool output samples)
-software-project-audit/       # THE SKILL — the only thing that ships
-├── SKILL.md
-├── scripts/audit.py          # CLI: readiness | discover | scan | test | validate | render
-├── scripts/auditlib/         # one module per responsibility
-├── references/               # methodology (source of truth), checklists, OWASP/CWE, profiles, subagent briefs
-└── assets/                   # Dockerfile, tool-versions.json, schemas, report templates, standards.json
+software-project-audit/       # THE PLUGIN — the only thing that ships
+├── .claude-plugin/plugin.json  # Claude Code manifest
+├── plugin.json               # Codex manifest
+└── skills/audit/             # the skill
+    ├── SKILL.md
+    ├── scripts/audit.py      # CLI: readiness | discover | scan | test | validate | render
+    ├── scripts/auditlib/     # one module per responsibility
+    ├── references/           # methodology (source of truth), checklists, OWASP/CWE, profiles, subagent briefs
+    └── assets/               # Dockerfile, tool-versions.json, schemas, report templates, standards.json
 ```
 
 ## Commands
@@ -36,24 +39,32 @@ software-project-audit/       # THE SKILL — the only thing that ships
 uv run pytest                          # full suite (docker-marked tests skip if Docker isn't running)
 uv run pytest -m "not docker and not hostrun"  # fast suite (hostrun tests build venvs and node_modules)
 uv run pytest tests/test_x.py::test_y  # single test
-uvx --from "git+https://github.com/agentskills/agentskills#subdirectory=skills-ref" skills-ref validate software-project-audit
-python3 software-project-audit/scripts/audit.py <subcommand> --project <path>
+uvx --from "git+https://github.com/agentskills/agentskills#subdirectory=skills-ref" skills-ref validate software-project-audit/skills/audit
+claude plugin validate --strict software-project-audit
+claude --plugin-dir software-project-audit        # load the plugin from the working tree
+python3 software-project-audit/skills/audit/scripts/audit.py <subcommand> --project <path>
 ```
 
 ## Hard rules
 
 **Skill format (Agent Skills standard):**
-- `SKILL.md` frontmatter `name` must equal the folder name `software-project-audit`.
+- `SKILL.md` frontmatter `name` must equal the folder name `audit`.
 - `description` ≤1024 chars, `compatibility` ≤500 chars, and the body under 500 lines.
 - Reference files are linked one level deep from `SKILL.md`, with relative paths.
 - `skills-ref validate` must pass.
+
+**Plugin packaging:**
+- `software-project-audit/` is the plugin root and holds only `.claude-plugin/plugin.json`, `plugin.json` and `skills/`. Both agents copy the whole folder into their plugin cache, so nothing repo-only (tests, fixtures, dev config) may go in it.
+- Both manifests use `name` `software-project-audit`, and their `version` must equal `SKILL.md` `metadata.version`. Users get an update only when that version changes, so bump all three together in a release.
+- No symlink inside the plugin may point outside it.
+- The published catalog lives in `WebStoating/skills`; `.agents/plugins/marketplace.json` here is for local development only.
 
 **Agent neutrality:**
 - `SKILL.md` and `references/` use generic actions ("run", "read", "ask the user", "delegate to a subagent").
 - Never name one agent's tools (`AskUserQuestion`, `TodoWrite`, `Agent tool`, `spawn_agent`, `apply_patch`, …).
 - The skill must use subagents when the agent has them, and give an equivalent result without them.
 
-**Skill scripts (`software-project-audit/scripts/`):**
+**Skill scripts (`software-project-audit/skills/audit/scripts/`):**
 - Python ≥3.9, **stdlib only**. No third-party imports and no `match` statements.
 - Every subprocess call takes an argv list, never `shell=True`.
 - They run on the user's host, where only Python 3 and Docker are guaranteed.
@@ -85,7 +96,7 @@ python3 software-project-audit/scripts/audit.py <subcommand> --project <path>
 
 ## Changing the methodology
 
-`software-project-audit/references/methodology.md` is the only methodology file. Edit it in place; there is no separate copy to sync. After changing it:
+`software-project-audit/skills/audit/references/methodology.md` is the only methodology file. Edit it in place; there is no separate copy to sync. After changing it:
 
 1. Run `uv run pytest`. `test_every_check_has_a_checklist_section` fails for any new, renamed or removed check ID. Update the matching `references/checklist-*.md` section.
 2. If the change touches vocabularies, schemas, scanners or the report contract, update the code, the schemas in `assets/` and the templates in the same change.
@@ -127,7 +138,7 @@ Every commit message must follow [Conventional Commits 1.0.0](https://www.conven
 | `chore` | Maintenance that fits none of the above |
 | `revert` | Reverting an earlier commit |
 
-**Scopes** (optional; use when the change is confined to one area): `skill` (SKILL.md), `cli`, `discover`, `readiness`, `scanners`, `tests-run`, `validate`, `render`, `references`, `methodology`, `install`.
+**Scopes** (optional; use when the change is confined to one area): `skill` (SKILL.md), `cli`, `discover`, `readiness`, `scanners`, `tests-run`, `validate`, `render`, `references`, `methodology`, `install`, `plugin`.
 
 **Rules:**
 - The description is imperative and lower-case, has no trailing period, and is at most 72 characters for the whole header line. For example: `feat(scanners): add zizmor workflow parser`.
