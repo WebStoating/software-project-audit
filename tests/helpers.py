@@ -3,6 +3,10 @@ import shutil
 import subprocess
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parent.parent
+# The plugin folder is the only thing that ships; the skill lives inside it.
+PLUGIN_DIR = ROOT / "software-project-audit"
+SKILL_DIR = PLUGIN_DIR / "skills" / "audit"
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 # Tool names specific to one agent; SKILL.md and references/ must not contain them.
 FORBIDDEN_TOOL_NAMES = ["AskUserQuestion", "TodoWrite", "Task tool", "Agent tool", "spawn_agent", "apply_patch"]

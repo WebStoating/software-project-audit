@@ -1,7 +1,9 @@
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "software-project-audit" / "scripts"))
+from helpers import SKILL_DIR
+
+sys.path.insert(0, str(SKILL_DIR / "scripts"))
 
 from auditlib import parsers  # noqa: E402
 from auditlib.dedupe import dedupe  # noqa: E402

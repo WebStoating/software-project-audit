@@ -1,9 +1,9 @@
 ---
-name: software-project-audit
+name: audit
 description: Audit a software project end to end. Runs a risk-based, evidence-driven Standard Audit of the current project (Python, TypeScript, JavaScript, Node, frontend) covering architecture, code quality, security and privacy (OWASP Top 10:2025, CWE Top 25), dependencies and supply chain, data, testing, CI/CD, infrastructure, observability, performance and documentation. Uses pinned Docker scanners and runs the project's unit tests with coverage in the developer's prepared local environment, then produces a validated report with findings, evidence and a readiness verdict. Use when the user asks to audit, review or assess a Python or JS/TS project, for a code review, technical due diligence, security review, OWASP or CWE coverage, or a production-readiness assessment.
 compatibility: Requires Python 3.9+, Docker and network access. Designed for Claude Code and Codex.
 metadata:
-  version: "0.1.0"
+  version: "1.0.0"
   author: iverbitskiy
 ---
 

@@ -5,10 +5,12 @@ import subprocess
 import sys
 from pathlib import Path
 
+from helpers import SKILL_DIR
+
 from auditlib import discover
 from helpers import make_fixture_repo
 
-AUDIT_PY = Path(__file__).resolve().parent.parent / "software-project-audit" / "scripts" / "audit.py"
+AUDIT_PY = SKILL_DIR / "scripts" / "audit.py"
 
 
 def test_discover_python_fixture(tmp_path):

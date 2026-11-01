@@ -2,12 +2,14 @@ import json
 import os
 from pathlib import Path
 
+from helpers import SKILL_DIR
+
 import pytest
 
 from auditlib import discover, testplan
 from helpers import make_fixture_repo
 
-VERSIONS = json.loads((Path(__file__).resolve().parent.parent / "software-project-audit"
+VERSIONS = json.loads((SKILL_DIR
                        / "assets" / "tool-versions.json").read_text(encoding="utf-8"))
 PINS = VERSIONS["coverage_tools"]
 

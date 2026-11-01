@@ -4,7 +4,7 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SKILL = ROOT / "software-project-audit"
+SKILL = ROOT / "software-project-audit" / "skills" / "audit"
 NAME = "software-project-audit"
 
 

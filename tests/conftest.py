@@ -3,12 +3,12 @@ from pathlib import Path
 
 import pytest
 
-ROOT = Path(__file__).resolve().parent.parent
+from helpers import SKILL_DIR
 
 
 @pytest.fixture
 def skill_root() -> Path:
-    return ROOT / "software-project-audit"
+    return SKILL_DIR
 
 
 @pytest.fixture

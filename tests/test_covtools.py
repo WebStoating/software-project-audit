@@ -2,11 +2,13 @@ import json
 import subprocess
 from pathlib import Path
 
+from helpers import SKILL_DIR
+
 from auditlib import covtools
 from auditlib.paths import AuditPaths
 from auditlib.testplan import TestPlan
 
-VERSIONS = json.loads((Path(__file__).resolve().parent.parent / "software-project-audit"
+VERSIONS = json.loads((SKILL_DIR
                        / "assets" / "tool-versions.json").read_text(encoding="utf-8"))
 PINS = VERSIONS["coverage_tools"]
 

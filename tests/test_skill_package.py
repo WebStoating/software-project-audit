@@ -24,7 +24,7 @@ def skill_md(skill_root):
 
 def test_frontmatter_name_matches_folder(skill_root):
     fm = parse_frontmatter(skill_md(skill_root))
-    assert fm["name"] == skill_root.name == "software-project-audit"
+    assert fm["name"] == skill_root.name == "audit"
 
 
 def test_description_and_compatibility_limits(skill_root):
@@ -59,5 +59,5 @@ def test_cli_lists_subcommands(capsys):
 def test_skill_version_read_from_frontmatter():
     import auditlib
 
-    assert auditlib.SKILL_VERSION == "0.1.0"
+    assert auditlib.SKILL_VERSION == "1.0.0"
     assert (auditlib.SKILL_ROOT / "SKILL.md").is_file()

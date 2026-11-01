@@ -3,9 +3,11 @@ import shutil
 import sys
 from pathlib import Path
 
+from helpers import SKILL_DIR
+
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "software-project-audit" / "scripts"))
+sys.path.insert(0, str(SKILL_DIR / "scripts"))
 
 from auditlib import dockerutil, scanners  # noqa: E402
 from auditlib.discover import EXCLUDED_DIRS  # noqa: E402

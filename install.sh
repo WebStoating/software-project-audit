@@ -18,7 +18,7 @@ set -euo pipefail
 
 NAME="software-project-audit"
 REPO_DIR="$(cd "$(dirname "$0")" && pwd -P)"
-SKILL_DIR="$REPO_DIR/$NAME"
+SKILL_DIR="$REPO_DIR/$NAME/skills/audit"
 
 usage() {
     sed -n '4,12p' "$0" | sed 's/^# \{0,1\}//'

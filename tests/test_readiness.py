@@ -6,12 +6,14 @@ import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 
+from helpers import SKILL_DIR
+
 import pytest
 
 from auditlib import readiness
 from helpers import make_fixture_repo
 
-AUDIT_PY = Path(__file__).resolve().parent.parent / "software-project-audit" / "scripts" / "audit.py"
+AUDIT_PY = SKILL_DIR / "scripts" / "audit.py"
 
 
 class _Handler(BaseHTTPRequestHandler):
