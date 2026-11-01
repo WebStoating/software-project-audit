@@ -1,0 +1,23 @@
+{
+  "name": "software-project-audit",
+  "version": "1.0.0",
+  "description": "Risk-based, evidence-driven audit of Python and JavaScript/TypeScript projects: architecture, code quality, security (OWASP Top 10:2025, CWE Top 25), dependencies, testing, CI/CD and more, with pinned Docker scanners and a validated report.",
+  "author": {
+    "name": "WebStoating",
+    "url": "https://github.com/WebStoating"
+  },
+  "homepage": "https://github.com/WebStoating/software-project-audit",
+  "repository": "https://github.com/WebStoating/software-project-audit",
+  "license": "Apache-2.0",
+  "keywords": [
+    "audit",
+    "code-review",
+    "security",
+    "owasp",
+    "cwe",
+    "due-diligence",
+    "python",
+    "javascript",
+    "typescript"
+  ]
+}

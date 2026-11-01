@@ -7,6 +7,7 @@ requires-python = ">=3.9"
 dev = ["pytest>=8"]
 
 [tool.pytest.ini_options]
-markers = ["docker: needs a running Docker daemon", "hostrun: creates venvs or node_modules and needs network"]
+markers = ["docker: needs a running Docker daemon", "hostrun: creates venvs or node_modules and needs network",
+           "agentcli: runs the claude or codex CLI; skipped when it is not installed"]
 testpaths = ["tests"]
 pythonpath = ["software-project-audit/skills/audit/scripts"]
