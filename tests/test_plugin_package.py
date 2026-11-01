@@ -59,6 +59,42 @@ def test_no_symlink_escapes_plugin_root():
                 assert target == str(root) or target.startswith(str(root) + os.sep), p
 
 
+DEV_CATALOG = PLUGIN_DIR.parent / ".agents" / "plugins" / "marketplace.json"
+DEV_MARKETPLACE = "software-project-audit-dev"
+
+
+def test_install_script_is_gone():
+    assert not (PLUGIN_DIR.parent / "install.sh").exists(), "install via the plugin, not a symlink"
+
+
+def test_dev_catalog_points_at_local_plugin():
+    cat = json.loads(DEV_CATALOG.read_text(encoding="utf-8"))
+    assert cat["name"] == DEV_MARKETPLACE
+    (entry,) = cat["plugins"]
+    assert entry["name"] == NAME
+    assert entry["source"] == {"source": "local", "path": "./software-project-audit"}
+    assert entry["policy"]["installation"] and entry["policy"]["authentication"] and entry["category"]
+
+
+@pytest.mark.agentcli
+@pytest.mark.skipif(shutil.which("codex") is None, reason="codex CLI not installed")
+def test_codex_installs_only_the_plugin_folder(tmp_path):
+    env = {"CODEX_HOME": str(tmp_path), "HOME": str(tmp_path), "PATH": os.environ.get("PATH", "")}
+
+    def codex(*args):
+        res = subprocess.run(["codex", "plugin", *args], env=env, capture_output=True, text=True, timeout=120)
+        assert res.returncode == 0, res.stdout + res.stderr
+
+    codex("marketplace", "add", str(PLUGIN_DIR.parent))
+    codex("add", "%s@%s" % (NAME, DEV_MARKETPLACE))
+    installed = tmp_path / "plugins" / "cache" / DEV_MARKETPLACE / NAME
+    (version_dir,) = list(installed.iterdir())
+    names = {p.name for p in version_dir.iterdir()}
+    assert names <= {".claude-plugin", ".codex-plugin", "plugin.json", "skills"}
+    assert (version_dir / "skills" / "audit" / "SKILL.md").is_file()
+    assert not (version_dir / "tests").exists()
+
+
 @pytest.mark.agentcli
 @pytest.mark.skipif(shutil.which("claude") is None, reason="claude CLI not installed")
 def test_claude_plugin_validate_strict():

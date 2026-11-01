@@ -1,0 +1,20 @@
+{
+  "name": "software-project-audit-dev",
+  "interface": {
+    "displayName": "software-project-audit (local development)"
+  },
+  "plugins": [
+    {
+      "name": "software-project-audit",
+      "source": {
+        "source": "local",
+        "path": "./software-project-audit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Coding"
+    }
+  ]
+}
