@@ -4,7 +4,7 @@ description: Audit a software project end to end. Runs a risk-based, evidence-dr
 compatibility: Requires Python 3.9+, Docker and network access. Designed for Claude Code and Codex.
 metadata:
   version: "1.0.0"
-  author: iverbitskiy
+  author: WebStoating
 ---
 
 # Software Project Audit
